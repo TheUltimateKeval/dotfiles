@@ -29,8 +29,8 @@
       )
       (box :orientation "v" :class "slider-bottom-right" :space-evenly "false"
         (box :orientation "h" :class "slider-wifi" :space-evenly "false"
-          (box :class "slider-wifi-icon" "")
-          (box :class "slider-wifi-id" wifissid)
+          (box :class "${wifissid == "" ? 'slider-wifi-icon-off' : 'slider-wifi-icon'}" "${ wifissid == "" ? '睊' : '直'}")
+          (box :class "${wifissid == "" ? 'slider-wifi-id-off' : 'slider-wifi-id'}" "${ wifissid == "" ? 'Disconnected' : wifissid}")
         )
         (box :orientation "h" :class "slider-systray")
       )
@@ -65,7 +65,7 @@
 (defpoll volume :interval "100ms" "~/.config/eww/scripts/getvol")
 (defpoll bright :interval "100ms" "~/.config/eww/scripts/getbri")
 
-(defpoll wifissid :interval "5m" "iwgetid -r")
+(defpoll wifissid :interval "5s" "iwgetid -r")
 
 ;;;;;;;;;;;;;
 ;; Windows ;;
