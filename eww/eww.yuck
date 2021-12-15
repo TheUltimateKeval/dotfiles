@@ -1,0 +1,82 @@
+;; Bar config
+(include "./bar.yuck")
+
+;;;;;;;;;;;;;
+;; Widgets ;;
+;;;;;;;;;;;;;
+
+(defwidget stat_label [icon value icon_class]
+  (box :orientation "h" :class "stat-label" :space-evenly "false"
+    (box :class icon_class icon)
+    (box :class "value-side" value)
+  )
+)
+
+(defwidget sliders_side [] 
+  (box :orientation "v" :space-evenly "false" :class "sliders-side" 
+    (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
+      (box :class "label-vol-side" "")
+      (scale :class "slider-vol-side-s" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}%")
+      (box :class "label-bright-side" " ")
+      (scale :class "slider-bright-side-s":min 0 :max 101 :value bright :onchange "~/.config/eww/scripts/setbri {}")
+    )
+
+    (box :orientation "h" :class "slider-bottom-container" :space-evenly "false"
+      (box :orientation "v" :class "slider-stats"
+        (stat_label :icon "CPU" :value "${cpu}%" :icon_class "label-cpu-side")
+        (stat_label :icon "TMP" :value "${coretemp} °C" :icon_class "label-temp-side")
+        (stat_label :icon "MEM" :value "${ram-used} MB" :icon_class "label-ram-side")
+      )
+      (box :orientation "v" :class "slider-bottom-right" :space-evenly "false"
+        (box :orientation "h" :class "slider-wifi" :space-evenly "false"
+          (box :class "slider-wifi-icon" "")
+          (box :class "slider-wifi-id" wifissid)
+        )
+        (box :orientation "h" :class "slider-systray")
+      )
+    )
+  )
+)
+
+(defwidget sys_side [] 
+    (box :orientation "h" :halign "center" :class "sysbtn" :space-evenly "true" 
+      (button :class "shutdown-side" :onclick "~/.config/eww/scripts/shutdown.sh" "襤")
+      (button :class "reboot-side" :onclick "~/.config/eww/scripts/reboot.sh" "累")
+      (button :class "lock-side" :onclick "~/scripts/i3lock.sh" "")
+      (button :class "suspend-side" :onclick "~/.config/eww/scripts/suspend.sh" "")
+      (button :class "logout-side" :onclick "~/.config/eww/scripts/logout.sh" "")))
+
+;;;;;;;;;;;;;;;
+;; Variables ;;
+;;;;;;;;;;;;;;;
+
+;; Date vars
+(defpoll number_day :interval "5h"  "date \"+%d\"")
+(defpoll month :interval "10h"  "date \"+%b\"")
+(defpoll min :interval "10s"  "date \"+%M\"")
+(defpoll hour :interval "30m"  "date \"+%H\"")
+(defpoll day :interval "15h"  "~/.config/eww/scripts/getday")
+(defpoll month_full :interval "15h"  "date \"+%B\"")
+(defpoll year_full :interval "15h"  "date \"+%Y\"")
+
+(defpoll ram-used :interval "2s"  "~/.config/eww/scripts/getram")
+(defpoll coretemp :interval "2m"  "scripts/coretemp.sh")
+(defpoll cpu :interval "2s" "scripts/getcpu")
+(defpoll volume :interval "100ms" "~/.config/eww/scripts/getvol")
+(defpoll bright :interval "100ms" "~/.config/eww/scripts/getbri")
+
+(defpoll wifissid :interval "5m" "iwgetid -r")
+
+;;;;;;;;;;;;;
+;; Windows ;;
+;;;;;;;;;;;;;
+
+(defwindow sliders_side 
+  :monitor 0
+  :geometry (geometry :x "12px" :y "46px" :width "318px" :height "165px")
+    (sliders_side))
+
+(defwindow sys_side 
+  :monitor 0
+  :geometry (geometry :x "${1366 - 200 - 12}px" :y "45px" :width "200px" :height "40px")
+    (sys_side))

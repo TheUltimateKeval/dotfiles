@@ -1,0 +1,89 @@
+;;;;;;;;;;;;;;;
+;; Vairables ;;
+;;;;;;;;;;;;;;;
+
+(defpoll time :interval "1s" :initial "00:00:00" "date +%H:%M:%S")
+(defpoll cur_desktop :interval "100ms" :initial "1" "xprop -root _NET_CURRENT_DESKTOP | awk '{print $3+1}'")
+
+;;;;;;;;;;;;;;;;;;;;
+;; Custom Widgets ;;
+;;;;;;;;;;;;;;;;;;;;
+
+(defwidget launcher [label path ?class]
+    (button :class "${class} launcher" :onclick "${path} &" "${label}")
+  )
+
+(defwidget bspwm [number]
+    (button
+      :class "${cur_desktop == number ? 'bspwm-selected' : 'bspwm-dot'}"
+      :onclick "bspc desktop -f ^${number}"
+      "${cur_desktop == number ? '' : ''}")
+  )
+
+(defwidget volume_dial []
+  (box :class "volume-dial"
+    (eventbox
+      :onscroll ""
+      (circular-progress
+        :value volume
+        :thickness "10"
+        )
+      )
+    )
+  )
+
+;;;;;;;;;;;;;;;;;
+;; Bar Widgets ;;
+;;;;;;;;;;;;;;;;;
+
+(defwidget bar_left []
+  (box :orientation "h" :class "bar-left" :space-evenly "false"
+      (button :class "control-panel-btn" :onclick "./launch_eww_performance" "")
+      (label :class "user-label ":text "Keval")
+      (box :class "bspwm"
+        (bspwm :number 1)
+        (bspwm :number 2)
+        (bspwm :number 3)
+        (bspwm :number 4)
+        (bspwm :number 5)
+      )
+    )
+  )
+
+(defwidget bar_middle []
+  (box :orientation "h" :class "bar-middle" :space-evenly "true"
+      (launcher :label "" :path "xfce4-terminal" :class "terminal-launcher")
+      (launcher :label "" :path "neovide" :class "editor-launcher")
+      (launcher :label "" :path "firefox" :class "firefox-launcher")
+      (launcher :label "" :path "discord" :class "discord-launcher")
+      (launcher :label "" :path "nautilus" :class "files-launcher")
+      (launcher :label "" :path "gnome-calculator" :class "calc-launcher")
+    )
+  )
+
+(defwidget bar_right []
+  (box :orientation "h" :class "bar-right" :space-evenly "false" :halign "end"
+      ; (volume_dial)
+      (label :text "${time}" :class "time")
+      (button :class "powermenu-btn" :onclick "./launch_eww_powermenu" "")
+    )
+  )
+
+;;;;;;;;;;;;;
+;; Windows ;;
+;;;;;;;;;;;;;
+
+(defwindow bar_left
+  :monitor 0
+  :geometry (geometry :x "12px" :y "8px" :width "190px" :height "30px")
+  (bar_left))
+
+(defwindow bar_middle
+  :monitor 0
+  :geometry (geometry :x "${(1366 - 190) / 2}" :y "8px" :width "190px" :height "30px")
+  (bar_middle))
+
+(defwindow bar_right
+  :monitor 0
+  :geometry (geometry :x "${1366 - 120 - 12}" :y "8px" :width "120px" :height "30px")
+  (bar_right))

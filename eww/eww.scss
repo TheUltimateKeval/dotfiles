@@ -1,0 +1,261 @@
+/*** Colors ***/
+$background: #12151D;
+$foreground: #ABB2BF;
+$border: #1E222A;
+
+$white: #ffffff;
+$red: #ec7875;
+$purple: #7e3ebe;
+$aqua: #1c7da6;
+$pink: #ec407a;
+$blurple: #5865f2;
+$blue: #42a5f5;
+$cyan: #4dd0e1;
+$teal: #00b19f;
+$green: #61c766;
+$lime: #b9c244;
+$yellow: #fdd835;
+$amber: #fbc02d;
+$orange: #e57c46;
+$brown: #ac8476;
+$indigo: #6c77bb;
+$gray: #9e9e9e;
+$blue-gray: #6d8895;
+
+$label-font: "Comfortaa";
+
+*{
+  all: unset;
+}
+
+window {
+  background-color: $background;
+  color: $foreground;
+  font-family: mononoki Nerd Font;
+  border: 1px solid #999;
+  border-radius: 16px;
+}
+
+/*** Bar Left ***/
+.bar-left {
+    font-size: 14px;
+    padding: 0px 15px 0px 10px;
+}
+
+.bar-left button {
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.control-panel-btn {
+    color: $purple;
+    padding-right: 15px;
+    margin-left: 5px;
+}
+
+.control-panel-btn:hover {
+    color: $white;
+}
+
+.user-label {
+    font-family: $label-font;
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+.bspwm {
+    margin-left: 8px;
+}
+
+.bspwm-dot {
+    margin-left: 4px;
+    transition: color 0.2s;
+}
+
+.bspwm-selected {
+    margin-left: 4px;
+    margin-right: 4px;
+    color: $purple;
+    transition: color 0.2s;
+}
+
+.bspwm-dot:hover, .bspwm-selected:hover {
+    color: $white;
+}
+
+/*** Bar Middle ***/
+.bar-middle {
+    padding: 0px 13px 0px 10px;
+}
+
+.launcher {
+    transition: color 0.2s;
+    margin: 0 5px 0 5px;
+}
+
+.launcher:hover {
+    color: $white;
+}
+
+.terminal-launcher { font-size: 22px; color: $blue-gray; }
+.editor-launcher { font-size: 20px; color: $green; }
+.firefox-launcher { font-size: 18px; color: $orange; margin-top: 1px; }
+.discord-launcher { font-size: 22px; color: $blurple; margin-top: 3px; }
+.files-launcher { font-size: 22px; color: $teal }
+.calc-launcher { font-size: 22px; color: $purple }
+
+/*** Bar Right ***/
+.bar-right {
+    padding: 0px 15px 0px 10px;
+}
+
+.powermenu-btn {
+    font-size: 18px;
+    color: $red;
+    transition: color 0.2s;
+}
+
+.powermenu-btn:hover {
+    color: $white;
+}
+
+.time {
+    font-family: $label-font;
+    font-size: 14px;
+    margin-left: 8px;
+    margin-right: 15px;
+    margin-top: 4px;
+    letter-spacing: 1px;
+}
+
+.volume-dial circular-progress {
+    color: $amber;
+}
+
+/*** Control Panel ***/
+
+.sliders-side button, .sysbtn button {
+  all: unset;
+  padding: 10px;
+}
+
+.sliders-side slider {
+  all: unset;
+  color: #d19a66;
+}
+
+.slider-vol-side-s trough highlight {
+	all: unset;
+	background-color: $red;
+	color: #000000;
+	border-radius: 10px;
+    min-height: 10px;
+}
+
+.slider-bright-side-s trough highlight {
+    all: unset;
+	background-color: $cyan;
+	color: #000000;
+	border-radius: 10px;
+    min-height: 10px;
+}
+
+.slider-vol-side-s trough {
+	all: unset;
+	background-color: $border;
+	border-radius: 50px;
+	min-height: 5px;
+    min-width: 100px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.slider-bright-side-s trough {
+    all: unset;
+    background-color: $border;
+    border-radius: 50px;
+    min-height: 5px;
+    min-width: 100px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.slider-stats {
+    margin-top: 5px;
+}
+
+.label-temp-side, .label-bright-side, .label-ram-side, .label-vol-side, .label-cpu-side{
+  margin-top: 10px;
+  font-family: Iosevka Nerd Font;
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.value-side {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-family: Comfortaa;
+  font-size: 15px;
+  background-color: $border;
+  padding: 5px 5px 3px 5px;
+  border-radius: 6px;
+}
+
+.label-bright-side {
+  color: $cyan;
+}
+
+.label-vol-side {
+  color: $red;
+}
+
+.label-ram-side {
+  color: #E06C75;
+  font-size: 18px;
+  padding-top: 3px;
+}
+
+.label-temp-side {
+  color: #98C379;
+  font-size: 18px;
+  padding-top: 3px;
+}
+
+.label-cpu-side {
+  color: $amber;
+  font-size: 18px;
+  padding-top: 3px;
+}
+
+.slider-bottom-right {
+    margin-left: 15px;
+}
+
+.slider-wifi {
+    padding-top: 14px;
+}
+
+.slider-wifi-icon {
+    font-size: 30px;
+    color: $lime;
+}
+
+.slider-wifi-id {
+    font-size: 16px;
+    margin-left: 30px;
+    background-color: $border;
+    border-radius: 6px;
+    padding: 0px 10px 0px 10px;
+}
+
+/*** Powermenu ***/
+.sysbtn button {
+  font-size: 24px;
+  margin: 0px 1px 0px 1px;
+  transition: color 0.2s;
+}
+
+.sysbtn button:hover {
+  color: #E06C75;
+}
+
