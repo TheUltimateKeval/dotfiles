@@ -153,10 +153,6 @@ super + alt + p
 super + End
   ~/.config/eww/launch_eww_powermenu
 
-# open system monitoring utility
-ctrl + alt + Delete
-  gnome-terminal -- glances
-
 # lockscreen
 super + Home
   ~/scripts/i3lock.sh
@@ -164,10 +160,6 @@ super + Home
 # ytfzf with dmenu
 XF86AudioPlay
   ~/scripts/yt.sh
-
-# open whatsapp web
-super + F7
-  xdg-open https://web.whatsapp.com
 
 # change brightness
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
