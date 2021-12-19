@@ -1,5 +1,7 @@
 # My EndeavourOS BSPWM Dotfiles
 
+![screenshot](https://i.imgur.com/xpw7nqF.png)
+
 ## Required Stuff
 - [eww](https://github.com/elkowar/eww)
 - [nitrogen](https://wiki.archlinux.org/title/nitrogen)
