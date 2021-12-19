@@ -11,7 +11,8 @@ fi
 
 ## Open widgets 
 run_eww() {
-  eww open-many sliders_side
+  eww update control-panel="true"
+  eww open sliders_side
 }
 
 ## Launch or close widgets accordingly
@@ -19,6 +20,7 @@ if [[ ! -f "$FILE" ]]; then
 	touch "$FILE"
 	run_eww
 else
+    eww update control-panel="false"
 	eww close sliders_side
 	rm "$FILE"
 fi

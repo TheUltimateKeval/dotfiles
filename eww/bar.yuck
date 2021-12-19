@@ -3,14 +3,17 @@
 ;;;;;;;;;;;;;;;
 
 (defpoll time :interval "1s" :initial "00:00:00" "date +%H:%M:%S")
+(defpoll date :interval "1h" :initial "01/01/1970" "date +%d/%m/%y")
 (defpoll cur_desktop :interval "100ms" :initial "1" "xprop -root _NET_CURRENT_DESKTOP | awk '{print $3+1}'")
+
+(defvar time_display 1)
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; Custom Widgets ;;
 ;;;;;;;;;;;;;;;;;;;;
 
 (defwidget launcher [label path ?class]
-    (button :class "${class} launcher" :onclick "${path} &" "${label}")
+    (button :class "${class} launcher" :onclick "cd ~ && ${path} &" "${label}")
   )
 
 (defwidget bspwm [number]
@@ -63,8 +66,7 @@
 
 (defwidget bar_right []
   (box :orientation "h" :class "bar-right" :space-evenly "false" :halign "end"
-      ; (volume_dial)
-      (label :text "${time}" :class "time")
+      (button :class "time" :onclick "scripts/toggletimedisplay.sh" "${time_display == 1 ? time : date}")
       (button :class "powermenu-btn" :onclick "./launch_eww_powermenu" "")
     )
   )

@@ -1,1 +1,1 @@
-top -b -n1 | grep "%Cpu(s)" | awk  'BEGIN {FS="  "} {print $2}' | awk '{print $1}' | awk 'BEGIN {FS="."} {print $1}'
+top -bn1 | grep "%Cpu(s)" | awk '{FS="  "} {print $2 + $4 + $6}' | cut -d "." -f 1

@@ -15,7 +15,7 @@
 (defwidget sliders_side [] 
   (box :orientation "v" :space-evenly "false" :class "sliders-side" 
     (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
-      (box :class "label-vol-side" "")
+      (box :class "label-vol-side" (button :onclick "pactl set-sink-mute 0 toggle" "${muted == 'no' ? '墳' : '婢'}"))
       (scale :class "slider-vol-side-s" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}%")
       (box :class "label-bright-side" " ")
       (scale :class "slider-bright-side-s":min 0 :max 101 :value bright :onchange "~/.config/eww/scripts/setbri {}")
@@ -54,23 +54,16 @@
 ;; Variables ;;
 ;;;;;;;;;;;;;;;
 
-;; Date vars
-(defpoll number_day :interval "5h"  "date \"+%d\"")
-(defpoll month :interval "10h"  "date \"+%b\"")
-(defpoll min :interval "10s"  "date \"+%M\"")
-(defpoll hour :interval "30m"  "date \"+%H\"")
-(defpoll day :interval "15h"  "~/.config/eww/scripts/getday")
-(defpoll month_full :interval "15h"  "date \"+%B\"")
-(defpoll year_full :interval "15h"  "date \"+%Y\"")
+(defvar control-panel false)
 
-(defpoll ram-used :interval "2s"  "~/.config/eww/scripts/getram")
-(defpoll coretemp :interval "2m"  "scripts/coretemp.sh")
-(defpoll cpu :interval "2s" "scripts/getcpu")
-(defpoll volume :interval "100ms" "~/.config/eww/scripts/getvol")
-(defpoll bright :interval "100ms" "~/.config/eww/scripts/getbri")
-(defpoll uptime :interval "1m" "scripts/getuptime")
-
-(defpoll wifissid :interval "5s" "iwgetid -r")
+(defpoll ram-used :run-while control-panel :interval "2s"  "~/.config/eww/scripts/getram")
+(defpoll coretemp :run-while control-panel :interval "2m"  "scripts/coretemp.sh")
+(defpoll cpu :run-while control-panel :interval "2s" "scripts/getcpu")
+(defpoll volume :run-while control-panel :interval "100ms" "~/.config/eww/scripts/getvol")
+(defpoll muted :run-while control-panel :interval "100ms" "~/.config/eww/scripts/getmuted")
+(defpoll bright :run-while control-panel :interval "100ms" "~/.config/eww/scripts/getbri")
+(defpoll uptime :run-while control-panel :interval "1m" "scripts/getuptime")
+(defpoll wifissid :run-while control-panel :interval "5s" "iwgetid -r")
 
 ;;;;;;;;;;;;;
 ;; Windows ;;
