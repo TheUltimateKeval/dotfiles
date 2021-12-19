@@ -32,7 +32,11 @@
           (box :class "${wifissid == "" ? 'slider-wifi-icon-off' : 'slider-wifi-icon'}" "${ wifissid == "" ? '睊' : '直'}")
           (box :class "${wifissid == "" ? 'slider-wifi-id-off' : 'slider-wifi-id'}" "${ wifissid == "" ? 'Disconnected' : wifissid}")
         )
-        (box :orientation "h" :class "slider-systray")
+        
+        (box :orientation "h" :class "slider-uptime" :space-evenly "false"
+          (box :class "slider-uptime-icon" "祥")
+          (box :class "slider-uptime-content" uptime)
+        )
       )
     )
   )
@@ -64,6 +68,7 @@
 (defpoll cpu :interval "2s" "scripts/getcpu")
 (defpoll volume :interval "100ms" "~/.config/eww/scripts/getvol")
 (defpoll bright :interval "100ms" "~/.config/eww/scripts/getbri")
+(defpoll uptime :interval "1m" "scripts/getuptime")
 
 (defpoll wifissid :interval "5s" "iwgetid -r")
 
