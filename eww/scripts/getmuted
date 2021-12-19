@@ -1,0 +1,1 @@
+pacmd list-sinks | grep muted | awk '{print $2}'
