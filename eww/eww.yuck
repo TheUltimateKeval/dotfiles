@@ -15,10 +15,10 @@
 (defwidget sliders_side [] 
   (box :orientation "v" :space-evenly "false" :class "sliders-side" 
     (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
-      (box :class "label-vol-side" (button :onclick "pactl set-sink-mute 0 toggle" "${muted == 'no' ? '墳' : '婢'}"))
-      (scale :class "slider-vol-side-s" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}%")
+      (box :class "label-vol-side ${muted == 'no' ? '' : 'label-vol-side-muted'}" (button :onclick "pactl set-sink-mute 0 toggle" "墳"))
+      (scale :class "slider-vol-side-s ${muted == 'no' ? '' : 'slider-vol-side-s-muted'}" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}%")
       (box :class "label-bright-side" " ")
-      (scale :class "slider-bright-side-s":min 0 :max 101 :value bright :onchange "~/.config/eww/scripts/setbri {}")
+      (scale :class "slider-bright-side-s":min 10 :max 101 :value bright :onchange "~/.config/eww/scripts/setbri {}")
     )
 
     (box :orientation "h" :class "slider-bottom-container" :space-evenly "false"

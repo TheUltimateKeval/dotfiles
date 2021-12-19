@@ -150,6 +150,11 @@ window {
 	color: #000000;
 	border-radius: 10px;
     min-height: 10px;
+    transition: background-color 0.2s;
+}
+
+.slider-vol-side-s-muted trough highlight {
+    background-color: rgba($red, 0.5);
 }
 
 .slider-bright-side-s trough highlight {
@@ -193,6 +198,11 @@ window {
 
 .label-vol-side {
     font-size: 24px;
+    transition: color 0.2s;
+}
+
+.label-vol-side-muted button {
+    color: rgba($red, 0.5);
 }
 
 .label-vol-side button {
