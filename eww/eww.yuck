@@ -12,33 +12,43 @@
   )
 )
 
-(defwidget sliders_side [] 
-  (box :orientation "v" :space-evenly "false" :class "sliders-side" 
-    (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
-      (box :class "label-vol-side ${muted == 'no' ? '' : 'label-vol-side-muted'}" (button :onclick "pactl set-sink-mute 0 toggle" "墳"))
-      (scale :class "slider-vol-side-s ${muted == 'no' ? '' : 'slider-vol-side-s-muted'}" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}%")
-      (box :class "label-bright-side" " ")
-      (scale :class "slider-bright-side-s":min 10 :max 101 :value bright :onchange "~/.config/eww/scripts/setbri {}")
-    )
+(defwidget sliders_side []
+  (box :orientation "h" :space-evenly "false"
+    (box :orientation "v" :space-evenly "false" :class "sliders-side" 
+      (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
+        (box :class "label-vol-side ${muted == 'no' ? '' : 'label-vol-side-muted'}" (button :onclick "pactl set-sink-mute 0 toggle" "墳"))
+        (scale :class "slider-vol-side-s ${muted == 'no' ? '' : 'slider-vol-side-s-muted'}" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}%")
+        (box :class "label-bright-side" " ")
+        (scale :class "slider-bright-side-s":min 10 :max 101 :value bright :onchange "~/.config/eww/scripts/setbri {}")
+      )
 
-    (box :orientation "h" :class "slider-bottom-container" :space-evenly "false"
-      (box :orientation "v" :class "slider-stats"
-        (stat_label :icon "CPU" :value "${cpu}%" :icon_class "label-cpu-side")
-        (stat_label :icon "TMP" :value "${coretemp} °C" :icon_class "label-temp-side")
-        (stat_label :icon "MEM" :value "${ram-used} MB" :icon_class "label-ram-side")
-      )
-      (box :orientation "v" :class "slider-bottom-right" :space-evenly "false"
-        (box :orientation "h" :class "slider-wifi" :space-evenly "false"
-          (box :class "${wifissid == "" ? 'slider-wifi-icon-off' : 'slider-wifi-icon'}" "${ wifissid == "" ? '睊' : '直'}")
-          (box :class "${wifissid == "" ? 'slider-wifi-id-off' : 'slider-wifi-id'}" "${ wifissid == "" ? 'Disconnected' : wifissid}")
+      (box :orientation "h" :class "slider-bottom-container" :space-evenly "false"
+        (box :orientation "v" :class "slider-stats"
+          (stat_label :icon "CPU" :value "${cpu}%" :icon_class "label-cpu-side")
+          (stat_label :icon "TMP" :value "${coretemp} °C" :icon_class "label-temp-side")
+          (stat_label :icon "MEM" :value "${ram-used} MB" :icon_class "label-ram-side")
         )
-        
-        (box :orientation "h" :class "slider-uptime" :space-evenly "false"
-          (box :class "slider-uptime-icon" "祥")
-          (box :class "slider-uptime-content" uptime)
+        (box :orientation "v" :class "slider-bottom-right" :space-evenly "false"
+          (box :orientation "h" :class "slider-wifi" :space-evenly "false"
+            (box :class "${wifissid == "" ? 'slider-wifi-icon-off' : 'slider-wifi-icon'}" "${ wifissid == "" ? '睊' : '直'}")
+            (box :class "${wifissid == "" ? 'slider-wifi-id-off' : 'slider-wifi-id'}" "${ wifissid == "" ? 'Disconnected' : wifissid}")
+          )
+          
+          (box :orientation "h" :class "slider-uptime" :space-evenly "false"
+            (box :class "slider-uptime-icon" "祥")
+            (box :class "slider-uptime-content" uptime)
+          )
         )
       )
     )
+    ; (graph
+    ;   :value cpu
+    ;   :thickness 1
+    ;   :time-range "10s"
+    ;   :width 200
+    ;   :line-style "miter"
+    ;   :height: 100
+    ; )
   )
 )
 

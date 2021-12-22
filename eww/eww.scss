@@ -44,22 +44,19 @@ window {
 
 .bar-left button {
     font-size: 18px;
-    transition: color 0.2s;
 }
 
 .control-panel-btn {
-    color: $purple;
-    padding-right: 15px;
-    margin-left: 5px;
+    padding: 0px 5px 0px 5px;
 }
 
 .control-panel-btn:hover {
-    color: $white;
 }
 
 .user-label {
     font-family: $label-font;
     font-size: 16px;
+    margin-left: 5px;
     margin-top: 2px;
 }
 

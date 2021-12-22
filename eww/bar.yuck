@@ -41,7 +41,7 @@
 
 (defwidget bar_left []
   (box :orientation "h" :class "bar-left" :space-evenly "false"
-      (button :class "control-panel-btn" :onclick "./launch_eww_performance" "")
+      (button :class "control-panel-btn" :onclick "./launch_eww_performance" (image :path "images/eos.png" :image-width 25))
       (label :class "user-label ":text "Keval")
       (box :class "bspwm"
         (bspwm :number 1)
