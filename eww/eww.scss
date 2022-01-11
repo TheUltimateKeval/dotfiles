@@ -33,7 +33,7 @@ window {
   color: $foreground;
   font-family: mononoki Nerd Font;
   border: 1px solid #999;
-  border-radius: 16px;
+  border-radius: 11px;
 }
 
 /*** Bar Left ***/
@@ -108,7 +108,7 @@ window {
 
 .powermenu-btn {
     font-size: 18px;
-    color: $red;
+    color: $blurple;
     transition: color 0.2s;
 }
 
@@ -213,6 +213,7 @@ window {
   font-size: 15px;
   background-color: $border;
   padding: 5px 5px 3px 5px;
+  min-width: 64px;
   border-radius: 6px;
 }
 
@@ -302,10 +303,11 @@ window {
 .sysbtn button {
   font-size: 24px;
   margin: 0px 1px 0px 1px;
+  color: $blurple;
   transition: color 0.2s;
 }
 
 .sysbtn button:hover {
-  color: #E06C75;
+  color: #febf6c;
 }
 
