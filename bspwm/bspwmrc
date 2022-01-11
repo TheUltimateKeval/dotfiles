@@ -4,7 +4,7 @@ sxhkd &
 
 bspc monitor -d I II III IV V
 
-bspc config border_width         3
+bspc config border_width         1
 bspc config window_gap          12
 bspc config top_padding         35
 
@@ -29,6 +29,7 @@ xrandr --output LVDS1 --brightness 1 &
 
 # /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh &
 xfsettingsd &
+xsetroot -cursor_name left_ptr &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 picom &
 nitrogen --set-scaled ~/Pictures/Wallpaper/gradientwave.png
