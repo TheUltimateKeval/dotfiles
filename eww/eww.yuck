@@ -64,7 +64,7 @@
 ;; Variables ;;
 ;;;;;;;;;;;;;;;
 
-(defvar control-panel false)
+(defvar control-panel true)
 
 (defpoll ram-used :run-while control-panel :interval "2s"  "~/.config/eww/scripts/getram")
 (defpoll coretemp :run-while control-panel :interval "2m"  "scripts/coretemp.sh")

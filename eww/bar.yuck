@@ -41,7 +41,7 @@
 
 (defwidget bar_left []
   (box :orientation "h" :class "bar-left" :space-evenly "false"
-      (button :class "control-panel-btn" :onclick "./launch_eww_performance" (image :path "images/eos.png" :image-width 25))
+      (button :class "control-panel-btn" :onclick "./eww_launcher.sh sliders_side" (image :path "images/eos.png" :image-width 25))
       (label :class "user-label ":text "Keval")
       (box :class "bspwm"
         (bspwm :number 1)
@@ -50,6 +50,7 @@
         (bspwm :number 4)
         (bspwm :number 5)
       )
+      (button :class "restart-bspwm" :onclick "bspc wm -r &" "")
     )
   )
 
@@ -67,7 +68,7 @@
 (defwidget bar_right []
   (box :orientation "h" :class "bar-right" :space-evenly "false" :halign "end"
       (button :class "time" :onclick "scripts/toggletimedisplay.sh" "${time_display == 1 ? time : date}")
-      (button :class "powermenu-btn" :onclick "./launch_eww_powermenu" "")
+      (button :class "powermenu-btn" :onclick "./eww_launcher.sh sys_side" "")
     )
   )
 
@@ -77,7 +78,7 @@
 
 (defwindow bar_left
   :monitor 0
-  :geometry (geometry :x "12px" :y "8px" :width "190px" :height "30px")
+  :geometry (geometry :x "12px" :y "8px" :width "220px" :height "30px")
   (bar_left))
 
 (defwindow bar_middle

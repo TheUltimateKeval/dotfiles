@@ -42,12 +42,9 @@ window {
     padding: 0px 15px 0px 10px;
 }
 
-.bar-left button {
-    font-size: 18px;
-}
-
 .control-panel-btn {
     padding: 0px 5px 0px 5px;
+    font-size: 18px;
 }
 
 .control-panel-btn:hover {
@@ -65,11 +62,13 @@ window {
 }
 
 .bspwm-dot {
+    font-size: 20px;
     margin-left: 4px;
     transition: color 0.2s;
 }
 
 .bspwm-selected {
+    font-size: 18px;
     margin-left: 4px;
     margin-right: 4px;
     color: $purple;
@@ -77,6 +76,17 @@ window {
 }
 
 .bspwm-dot:hover, .bspwm-selected:hover {
+    color: $white;
+}
+
+.restart-bspwm {
+    margin-left: 7px;
+    font-size: 16px;
+    color: $purple;
+    transition: color 0.2s;
+}
+
+.restart-bspwm:hover {
     color: $white;
 }
 

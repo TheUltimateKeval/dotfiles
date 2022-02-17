@@ -25,7 +25,7 @@ super + Escape
 
 # volume increase / decrease
 XF86Audio{RaiseVolume,LowerVolume}
-	pactl set-sink-volume 0 {+,-}3% && notify-send "Volume" "$(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')%" -t 1000 -a "Volume"
+	pactl set-sink-volume 0 {+,-}3% && notify-send "Volume" -h string:hlcolor:#ec7875 -h int:value:$(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,') -t 1000 -a "Volume"
 
 # volume mute
 XF86AudioMute

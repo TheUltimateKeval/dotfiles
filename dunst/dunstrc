@@ -33,7 +33,7 @@
     origin = top-right
 
     # Offset from the origin
-    offset = 12x50
+    offset = 12x48
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -49,10 +49,10 @@
 
     # Set the progress bar height. This includes the frame, so make sure
     # it's at least twice as big as the frame width.
-    progress_bar_height = 10
+    progress_bar_height = 8
 
     # Set the frame width of the progress bar
-    progress_bar_frame_width = 1
+    progress_bar_frame_width = 0
 
     # Set the minimum width for the progress bar
     progress_bar_min_width = 150
@@ -434,5 +434,6 @@
 [stack-volumes]
     summary = "Volume"
     set_stack_tag = "volume"
+    # new_icon = "/home/keval/.config/dunst/icons/volume.png"
 #
 # vim: ft=cfg
