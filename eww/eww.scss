@@ -2,6 +2,7 @@
 $background: #12151D;
 $foreground: #ABB2BF;
 $border: #1E222A;
+$foreground-off: lighten($border, 20);
 
 $white: #ffffff;
 $red: #ec7875;
@@ -88,25 +89,39 @@ window {
 }
 
 /*** Bar Middle ***/
-// .bar-middle {
-//     padding: 0px 13px 0px 10px;
-// }
 
 .launcher {
     transition: color 0.2s;
-    margin: 0 5px 0 5px;
+    margin: 0 7px 0 7px;
+    color: $foreground-off;
+}
+
+.launcher-active {
+    color: $foreground;
 }
 
 .launcher:hover {
     color: $white;
 }
 
-.terminal-launcher { font-size: 22px; color: $blue-gray; }
-.editor-launcher { font-size: 20px; color: $green; }
-.firefox-launcher { font-size: 18px; color: $orange; margin-top: 1px; }
-.discord-launcher { font-size: 22px; color: $blurple; margin-top: 3px; }
-.files-launcher { font-size: 22px; color: $teal }
-.calc-launcher { font-size: 22px; color: $purple }
+.terminal-launcher { font-size: 22px }
+.terminal-launcher-active { color: $indigo }
+
+.editor-launcher { font-size: 20px }
+.editor-launcher-active { color: $green }
+
+.firefox-launcher { font-size: 18px; margin-top: 1px; }
+.firefox-launcher-active { color: $orange }
+
+.discord-launcher { font-size: 22px; margin-top: 3px; }
+.discord-launcher-active { color: $blurple }
+
+.files-launcher { font-size: 22px }
+.files-launcher-active { color: $teal }
+
+.calc-launcher { font-size: 22px }
+.calc-launcher-active { color: $cyan }
+
 
 /*** Bar Right ***/
 .bar-right {
@@ -116,7 +131,7 @@ window {
 
 .powermenu-btn {
     font-size: 24px;
-    color: lighten($border, 20);
+    color: $foreground-off;
     transition: color 0.2s;
     margin: 0px 6px 0px 6px;
 }

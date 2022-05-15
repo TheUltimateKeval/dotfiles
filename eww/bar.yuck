@@ -2,14 +2,15 @@
 ;; Vairables ;;
 ;;;;;;;;;;;;;;;
 (defpoll cur_desktop :interval "100ms" :initial "1" "xprop -root _NET_CURRENT_DESKTOP | awk '{print $3+1}'")
+(defpoll apps :interval "1s" "scripts/getactiveapps.sh")
 (defvar sys_slide false)
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; Custom Widgets ;;
 ;;;;;;;;;;;;;;;;;;;;
 
-(defwidget launcher [label path ?class]
-    (button :class "${class} launcher" :onclick "cd ~ && ${path} &" "${label}")
+(defwidget launcher [label path ?process ?class]
+    (button :class "${class} launcher ${(process != '' && apps[process]) ? class + '-active' : ''}" :onclick "cd ~ && ${path} &" "${label}")
   )
 
 (defwidget bspwm [number]
@@ -58,12 +59,12 @@
 
 (defwidget bar_middle []
   (box :orientation "h" :class "bar-middle" :space-evenly "true"
-      (launcher :label "" :path "xfce4-terminal" :class "terminal-launcher")
-      (launcher :label "" :path "code" :class "editor-launcher")
-      (launcher :label "" :path "firefox" :class "firefox-launcher")
-      (launcher :label "" :path "discord" :class "discord-launcher")
-      (launcher :label "" :path "nautilus" :class "files-launcher")
-      (launcher :label "" :path "gnome-calculator" :class "calc-launcher")
+      (launcher :label "" :path "xfce4-terminal" :process "xfce4-terminal" :class "terminal-launcher")
+      (launcher :label "" :path "code" :process "code" :class "editor-launcher")
+      (launcher :label "" :path "firefox" :process "firefox" :class "firefox-launcher")
+      (launcher :label "" :path "discord" :process "Discord" :class "discord-launcher")
+      (launcher :label "" :path "nautilus" :process "nautilus" :class "files-launcher")
+      (launcher :label "" :path "gnome-calculator" :process "gnome-calculato" :class "calc-launcher")
     )
   )
 
