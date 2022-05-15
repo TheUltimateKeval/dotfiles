@@ -47,9 +47,6 @@ window {
     font-size: 18px;
 }
 
-.control-panel-btn:hover {
-}
-
 .user-label {
     font-family: $label-font;
     font-size: 16px;
@@ -91,9 +88,9 @@ window {
 }
 
 /*** Bar Middle ***/
-.bar-middle {
-    padding: 0px 13px 0px 10px;
-}
+// .bar-middle {
+//     padding: 0px 13px 0px 10px;
+// }
 
 .launcher {
     transition: color 0.2s;
@@ -113,30 +110,23 @@ window {
 
 /*** Bar Right ***/
 .bar-right {
-    padding: 0px 15px 0px 10px;
+    padding: 0px 5px 0px 10px;
+    margin: 1px 0px 1px 0px;
 }
 
 .powermenu-btn {
-    font-size: 18px;
-    color: $blurple;
+    font-size: 24px;
+    color: lighten($border, 20);
     transition: color 0.2s;
+    margin: 0px 6px 0px 6px;
 }
 
 .powermenu-btn:hover {
-    color: $white;
+    color: $purple;
 }
 
-.time {
-    font-family: $label-font;
-    font-size: 14px;
-    // margin-left: 8px;
-    margin-right: 15px;
-    margin-top: 4px;
-    letter-spacing: 1px;
-}
-
-.volume-dial circular-progress {
-    color: $amber;
+.powermenu-main {
+    color: $purple;
 }
 
 /*** Control Panel ***/
@@ -309,15 +299,26 @@ window {
     padding: 0px 10px 0px 10px;
 }
 
-/*** Powermenu ***/
-.sysbtn button {
-  font-size: 24px;
-  margin: 0px 1px 0px 1px;
-  color: $blurple;
-  transition: color 0.2s;
+/** Date Time **/
+
+.date {
+    font-family: "Hurmit Nerd Font Mono";
+    font-size: 20px;
+    color: $green;
+    margin-bottom: 15px;
 }
 
-.sysbtn button:hover {
-  color: #febf6c;
+.time {
+    font-family: "Hurmit Nerd Font Mono";
+    font-size: 40px;
+    margin-bottom: 20px;
+    background-color: $border;
+    padding: 10px 10px 0px 5px;
+    border-radius: 10px;
 }
 
+.day {
+    font-family: "Hurmit Nerd Font Mono";
+    font-size: 20px;
+    color: $teal;
+}

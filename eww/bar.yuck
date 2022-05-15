@@ -1,12 +1,8 @@
 ;;;;;;;;;;;;;;;
 ;; Vairables ;;
 ;;;;;;;;;;;;;;;
-
-(defpoll time :interval "1s" :initial "00:00:00" "date +%H:%M:%S")
-(defpoll date :interval "1h" :initial "01/01/1970" "date +%d/%m/%y")
 (defpoll cur_desktop :interval "100ms" :initial "1" "xprop -root _NET_CURRENT_DESKTOP | awk '{print $3+1}'")
-
-(defvar time_display 1)
+(defvar sys_slide false)
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; Custom Widgets ;;
@@ -39,9 +35,15 @@
 ;; Bar Widgets ;;
 ;;;;;;;;;;;;;;;;;
 
+(defwidget bar_container []
+  (centerbox :orientation "h"
+    (bar_left)
+    (bar_middle)
+    (bar_right)))
+
 (defwidget bar_left []
   (box :orientation "h" :class "bar-left" :space-evenly "false"
-      (button :class "control-panel-btn" :onclick "./eww_launcher.sh sliders_side" (image :path "images/eos.png" :image-width 25))
+      (button :class "control-panel-btn" :onclick "./eww_launcher.sh sliders_side && ./eww_launcher.sh datetime" (image :path "images/eos.png" :image-width 25))
       (label :class "user-label ":text "Keval")
       (box :class "bspwm"
         (bspwm :number 1)
@@ -57,7 +59,7 @@
 (defwidget bar_middle []
   (box :orientation "h" :class "bar-middle" :space-evenly "true"
       (launcher :label "" :path "xfce4-terminal" :class "terminal-launcher")
-      (launcher :label "" :path "neovide" :class "editor-launcher")
+      (launcher :label "" :path "code" :class "editor-launcher")
       (launcher :label "" :path "firefox" :class "firefox-launcher")
       (launcher :label "" :path "discord" :class "discord-launcher")
       (launcher :label "" :path "nautilus" :class "files-launcher")
@@ -67,14 +69,34 @@
 
 (defwidget bar_right []
   (box :orientation "h" :class "bar-right" :space-evenly "false" :halign "end"
-      (button :class "time" :onclick "scripts/toggletimedisplay.sh" "${time_display == 1 ? time : date}")
-      (button :class "powermenu-btn" :onclick "./eww_launcher.sh sys_side" "")
+      ; (button :class "time" :onclick "scripts/toggletimedisplay.sh" "${time_display == 1 ? time : date}")
+      (eventbox
+        :onhover "eww update sys_slide=true"
+        :onhoverlost "eww update sys_slide=false"
+        (box :orientation "h" :halign "end" :space-evenly "false"
+          (revealer
+            :reveal sys_slide
+            :transition "slideleft"
+            :duration "500ms"
+            (box :orientation "h" :halign "end" :space-evenly "true"
+              (button :class "powermenu-btn" :style "font-size: 24px" :onclick "~/.config/eww/scripts/reboot.sh" "累")
+              (button :class "powermenu-btn" :style "font-size: 22px" :onclick "~/scripts/i3lock.sh" "")
+              (button :class "powermenu-btn" :style "font-size: 22px" :onclick "~/.config/eww/scripts/suspend.sh" "")
+              (button :class "powermenu-btn" :style "font-size: 24px" :onclick "~/.config/eww/scripts/logout.sh" "")))
+          (button :class "powermenu-btn powermenu-main" :style "font-size: 24px;" :onclick "~/.config/eww/scripts/shutdown.sh" "襤"))
+      )
     )
   )
 
 ;;;;;;;;;;;;;
 ;; Windows ;;
 ;;;;;;;;;;;;;
+
+(defwindow bar_container
+  :monitor 0
+  :geometry (geometry :x "12px" :y "8px" :width "${1366 - 12 -12}" :height "30px")
+  (bar_container)
+)
 
 (defwindow bar_left
   :monitor 0
@@ -88,5 +110,5 @@
 
 (defwindow bar_right
   :monitor 0
-  :geometry (geometry :x "${1366 - 120 - 12}" :y "8px" :width "120px" :height "30px")
+  :geometry (geometry :x "${1366 - 150 - 12}" :y "8px" :width "150px" :height "30px")
   (bar_right))

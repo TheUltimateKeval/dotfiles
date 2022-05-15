@@ -41,24 +41,14 @@
         )
       )
     )
-    ; (graph
-    ;   :value cpu
-    ;   :thickness 1
-    ;   :time-range "10s"
-    ;   :width 200
-    ;   :line-style "miter"
-    ;   :height: 100
-    ; )
-  )
-)
+))
 
-(defwidget sys_side [] 
-    (box :orientation "h" :halign "center" :class "sysbtn" :space-evenly "true" 
-      (button :class "shutdown-side" :onclick "~/.config/eww/scripts/shutdown.sh" "襤")
-      (button :class "reboot-side" :onclick "~/.config/eww/scripts/reboot.sh" "累")
-      (button :class "lock-side" :onclick "~/scripts/i3lock.sh" "")
-      (button :class "suspend-side" :onclick "~/.config/eww/scripts/suspend.sh" "")
-      (button :class "logout-side" :onclick "~/.config/eww/scripts/logout.sh" "")))
+(defwidget datetime []
+  (box :orientation "v" :halign "center" :valign "center" :space-evenly "false"
+    (label :class "date" :text date)
+    (label :class "time" :text time)
+    (label :class "day" :text day)
+))
 
 ;;;;;;;;;;;;;;;
 ;; Variables ;;
@@ -75,6 +65,10 @@
 (defpoll uptime :run-while control-panel :interval "1m" "scripts/getuptime")
 (defpoll wifissid :run-while control-panel :interval "5s" "iwgetid -r")
 
+(defpoll time :run-while control-panel :interval "5s" :initial "" "date +%H:%M")
+(defpoll date :run-while control-panel :interval "1h" :initial "" "date +%d/%m/%y")
+(defpoll day :run-while control-panel :interval "1h" :initial "" "date +%A")
+
 ;;;;;;;;;;;;;
 ;; Windows ;;
 ;;;;;;;;;;;;;
@@ -82,9 +76,9 @@
 (defwindow sliders_side 
   :monitor 0
   :geometry (geometry :x "12px" :y "46px" :width "318px" :height "165px")
-    (sliders_side))
+  (sliders_side))
 
-(defwindow sys_side 
+(defwindow datetime
   :monitor 0
-  :geometry (geometry :x "${1366 - 200 - 12}px" :y "45px" :width "200px" :height "40px")
-    (sys_side))
+  :geometry (geometry :x "${12 + 318 + 12}" :y "46px" :width "200px" :height "165px")
+  (datetime))
