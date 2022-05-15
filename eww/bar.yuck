@@ -44,7 +44,7 @@
 
 (defwidget bar_left []
   (box :orientation "h" :class "bar-left" :space-evenly "false"
-      (button :class "control-panel-btn" :onclick "./eww_launcher.sh sliders_side && ./eww_launcher.sh datetime" (image :path "images/eos.png" :image-width 25))
+      (button :class "control-panel-btn" :onclick "./eww_launcher.sh sliders_side datetime" (image :path "images/eos.png" :image-width 25))
       (label :class "user-label ":text "Keval")
       (box :class "bspwm"
         (bspwm :number 1)
@@ -70,7 +70,6 @@
 
 (defwidget bar_right []
   (box :orientation "h" :class "bar-right" :space-evenly "false" :halign "end"
-      ; (button :class "time" :onclick "scripts/toggletimedisplay.sh" "${time_display == 1 ? time : date}")
       (eventbox
         :onhover "eww update sys_slide=true"
         :onhoverlost "eww update sys_slide=false"
