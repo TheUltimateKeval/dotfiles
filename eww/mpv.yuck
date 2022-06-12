@@ -1,0 +1,26 @@
+(defpoll mpv_ppos :run_while "${mpv_on != '0'}" :interval "1s" :initial "0" "scripts/mpv/percent-pos.sh")
+(defpoll mpv_name :run_while "${mpv_on != '0'}" :interval "1s" :initial "" "scripts/mpv/song-name.sh")
+(defpoll mpv_pos :run_while "${mpv_on != '0'}" :interval "1s" :initial "" "scripts/mpv/get-pos.sh")
+(defpoll mpv_duration :run_while "${mpv_on != '0'}" :interval "500ms" :initial "" "scripts/mpv/get-duration.sh")
+
+(defwidget mpv_panel []
+    (box :orientation "v" :space-evenly false :halign "center" :class "mpv-container"
+        (box :orientation "h" :space-evenly false
+            (label :class "song-icon" :text "")
+            (label :class "song-name" :limit-width 26 :text mpv_name)
+        )
+
+        (progress :class "mpv-progress" :value mpv_ppos :orientation "h" :width 320)
+
+        (centerbox :orientation "h" :class "mpv-time"
+            (label :text mpv_pos)
+            (box :width 250)
+            (label :text mpv_duration)
+        )
+    )
+)
+
+(defwindow mpv_panel
+  :monitor 0
+  :geometry (geometry :x "${1366 - 12 - 350}" :y "46px" :width "350px" :height "70px")
+  (mpv_panel))

@@ -1,0 +1,1 @@
+echo '{ "command": ["get_property", "percent-pos"] }' | socat - ~/.config/mpv/socket | jq '.data'

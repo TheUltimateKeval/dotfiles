@@ -7,6 +7,8 @@ $foreground-off: lighten($border, 20);
 $white: #ffffff;
 $red: #ec7875;
 $purple: #7e3ebe;
+$purple-light: lighten($purple, 20);
+$purple-lighter: lighten($purple, 25);
 $aqua: #1c7da6;
 $pink: #ec407a;
 $blurple: #5865f2;
@@ -144,6 +146,63 @@ window {
     color: $purple;
 }
 
+/*** mpv Window ***/
+
+.mpv-btn {
+    font-size: 20px;
+    margin-right: 3px;
+    margin-top: 1px;
+    color: $lime;
+}
+
+.mpv-container {
+    padding: 10px 0 10px 0;
+}
+
+.song-icon {
+    font-size: 20px;
+    color: $lime;
+    margin-right: 15px;
+}
+
+.song-name {
+    font-size: 18px;
+}
+
+.mpv-progress {
+    margin-top: 12px;
+}
+
+.mpv-progress trough {
+    background-color: $border;
+    border-radius: 5px;
+    min-height: 8px;
+}
+
+.mpv-progress trough progress {
+    background-color: rgba($lime, 0.8);
+    border-radius: 5px;
+}
+
+.mpv-controls {
+    margin-right: 7px;
+    font-size: 16px;
+    color: $foreground-off;
+}
+
+.mpv-controls button {
+    transition: color 0.2s;
+    margin: 0 7px 0 7px;
+}
+
+.mpv-controls button:hover {
+    color: $lime;
+}
+
+.mpv-time {
+    margin-top: 5px;
+}
+
 /*** Control Panel ***/
 
 .sliders-side button, .sysbtn button {
@@ -151,14 +210,9 @@ window {
   padding: 10px;
 }
 
-.sliders-side slider {
-  all: unset;
-  color: #d19a66;
-}
-
 .slider-vol-side-s trough highlight {
 	all: unset;
-	background-color: $red;
+	background-color: lighten($red, 3);
 	color: #000000;
 	border-radius: 10px;
     min-height: 10px;
@@ -166,12 +220,12 @@ window {
 }
 
 .slider-vol-side-s-muted trough highlight {
-    background-color: rgba($red, 0.5);
+    background-color: rgba($red, 0.4);
 }
 
 .slider-bright-side-s trough highlight {
     all: unset;
-	background-color: $cyan;
+	background-color: $purple-lighter;
 	color: #000000;
 	border-radius: 10px;
     min-height: 10px;
@@ -232,28 +286,31 @@ window {
   border-radius: 6px;
 }
 
-.label-bright-side {
-  color: $cyan;
-}
-
 .label-vol-side {
   color: $red;
 }
 
-.label-ram-side {
-  color: #E06C75;
-  font-size: 18px;
-  padding-top: 3px;
-}
-
-.label-temp-side {
-  color: #98C379;
-  font-size: 18px;
-  padding-top: 3px;
+.label-bright-side {
+  color: $purple-light;
 }
 
 .label-cpu-side {
-  color: $amber;
+    // color: #98C379;
+    color: lighten($red, 10);
+    font-size: 18px;
+    padding-top: 3px;
+}
+
+.label-temp-side {
+    // color: #98C379;
+    color: lighten($red, 5);
+    font-size: 18px;
+    padding-top: 3px;
+}
+
+.label-ram-side {
+//   color: #E06C75;
+  color: $red;
   font-size: 18px;
   padding-top: 3px;
 }
@@ -268,7 +325,7 @@ window {
 
 .slider-wifi-icon {
     font-size: 30px;
-    color: $lime;
+    color: lighten($purple-light, 10);
 }
 
 .slider-wifi-icon-off {
@@ -302,7 +359,7 @@ window {
 .slider-uptime-icon {
     margin-left: 3px;
     font-size: 30px;
-    color: $blue;
+    color: $purple-light;
 }
 
 .slider-uptime-content {
@@ -316,24 +373,29 @@ window {
 
 /** Date Time **/
 
-.date {
-    font-family: "Hurmit Nerd Font Mono";
-    font-size: 20px;
-    color: $green;
-    margin-bottom: 15px;
-}
-
 .time {
     font-family: "Hurmit Nerd Font Mono";
+    color: $purple-lighter;
     font-size: 40px;
-    margin-bottom: 20px;
     background-color: $border;
-    padding: 10px 10px 0px 5px;
+    margin-left: 25px;
+    padding: 10px 15px 0px 10px;
     border-radius: 10px;
 }
 
-.day {
-    font-family: "Hurmit Nerd Font Mono";
+.date-container {
+    margin-left: 25px;
+}
+
+.date {
+    font-family: "Comfortaa";
     font-size: 20px;
-    color: $teal;
+    color: $purple-lighter;
+    margin-bottom: 5px;
+}
+
+.day {
+    font-family: "Comfortaa";
+    font-size: 19px;
+    color: $purple-light;
 }

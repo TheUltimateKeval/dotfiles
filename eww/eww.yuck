@@ -1,4 +1,4 @@
-;; Bar config
+(include "./mpv.yuck")
 (include "./bar.yuck")
 
 ;;;;;;;;;;;;;
@@ -17,9 +17,9 @@
     (box :orientation "v" :space-evenly "false" :class "sliders-side" 
       (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
         (box :class "label-vol-side ${muted == 'no' ? '' : 'label-vol-side-muted'}" (button :onclick "pactl set-sink-mute 0 toggle" "墳"))
-        (scale :class "slider-vol-side-s ${muted == 'no' ? '' : 'slider-vol-side-s-muted'}" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}%")
+        (scale :class "slider-vol-side-s ${muted == 'no' ? '' : 'slider-vol-side-s-muted'}" :orientation "h" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}% &")
         (box :class "label-bright-side" " ")
-        (scale :class "slider-bright-side-s":min 10 :max 101 :value bright :onchange "~/.config/eww/scripts/setbri {}")
+        (scale :class "slider-bright-side-s" :orientation "h" :min 10 :max 101 :value bright :onchange "~/.config/eww/scripts/setbri {} &")
       )
 
       (box :orientation "h" :class "slider-bottom-container" :space-evenly "false"
@@ -44,10 +44,12 @@
 ))
 
 (defwidget datetime []
-  (box :orientation "v" :halign "center" :valign "center" :space-evenly "false"
-    (label :class "date" :text date)
-    (label :class "time" :text time)
-    (label :class "day" :text day)
+  (box :orientation "h" :valign "center" :space-evenly "false"
+    (box :class "date-container" :orientation "v" :valign "center" :space-evenly "false"
+      (label :class "date" :text date)
+      (label :class "day" :text day)
+    )
+  (label :class "time" :text time)
 ))
 
 ;;;;;;;;;;;;;;;
@@ -66,7 +68,7 @@
 (defpoll wifissid :run-while control-panel :interval "5s" "iwgetid -r")
 
 (defpoll time :run-while control-panel :interval "5s" :initial "" "date +%H:%M")
-(defpoll date :run-while control-panel :interval "1h" :initial "" "date +%d/%m/%y")
+(defpoll date :run-while control-panel :interval "1h" :initial "" "date +%d%_4b,%_3y")
 (defpoll day :run-while control-panel :interval "1h" :initial "" "date +%A")
 
 ;;;;;;;;;;;;;
@@ -80,5 +82,5 @@
 
 (defwindow datetime
   :monitor 0
-  :geometry (geometry :x "${12 + 318 + 12}" :y "46px" :width "200px" :height "165px")
+  :geometry (geometry :x "${12}" :y "${46 + 165 + 12}" :width "318px" :height "80px")
   (datetime))

@@ -3,7 +3,12 @@
 ;;;;;;;;;;;;;;;
 (defpoll cur_desktop :interval "100ms" :initial "1" "xprop -root _NET_CURRENT_DESKTOP | awk '{print $3+1}'")
 (defpoll apps :interval "1s" "scripts/getactiveapps.sh")
+
+(defpoll mpv_on :run_while true :interval "1s" :initial "0" "pgrep -c mpv &")
+(defpoll mpv_play :run_while "${mpv_on != '0'}" :interval "100ms" :initial "" "scripts/mpv/play-status.sh")
+
 (defvar sys_slide false)
+(defvar mpv_slide false)
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; Custom Widgets ;;
@@ -70,20 +75,44 @@
 
 (defwidget bar_right []
   (box :orientation "h" :class "bar-right" :space-evenly "false" :halign "end"
-      (eventbox
-        :onhover "eww update sys_slide=true"
-        :onhoverlost "eww update sys_slide=false"
-        (box :orientation "h" :halign "end" :space-evenly "false"
-          (revealer
-            :reveal sys_slide
-            :transition "slideleft"
-            :duration "500ms"
-            (box :orientation "h" :halign "end" :space-evenly "true"
-              (button :class "powermenu-btn" :style "font-size: 24px" :onclick "~/.config/eww/scripts/reboot.sh" "累")
-              (button :class "powermenu-btn" :style "font-size: 22px" :onclick "~/scripts/i3lock.sh" "")
-              (button :class "powermenu-btn" :style "font-size: 22px" :onclick "~/.config/eww/scripts/suspend.sh" "")
-              (button :class "powermenu-btn" :style "font-size: 24px" :onclick "~/.config/eww/scripts/logout.sh" "")))
-          (button :class "powermenu-btn powermenu-main" :style "font-size: 24px;" :onclick "~/.config/eww/scripts/shutdown.sh" "襤"))
+    (eventbox
+      :onhover "eww update mpv_slide=true && eww open mpv_panel"
+      :onhoverlost "eww update mpv_slide=false && eww close mpv_panel"
+      :visible "${mpv_on != '0'}"
+
+      (box :orientation "h" :halign "end" :space-evenly false
+        (revealer
+          :reveal mpv_slide
+          :transition "slideleft"
+          :duration "500ms"
+          (box :orientation "h" :halign "end" :space-evenly "true" :class "mpv-controls"
+            (button :class "mpv-search" :onclick "" "")
+            (button
+              :class "mpv-play"
+              :onclick "scripts/mpv/toggle-play.sh"
+              "${mpv_play == 'true' ? '' : ''}"
+            )
+            (button :class "mpv-stop" :onclick "scripts/mpv/stop.sh" "")
+          )
+        )
+        (button :class "mpv-btn" "")
+      )
+    )
+
+    (eventbox
+      :onhover "eww update sys_slide=true"
+      :onhoverlost "eww update sys_slide=false"
+      (box :orientation "h" :halign "end" :space-evenly "false"
+        (revealer
+          :reveal sys_slide
+          :transition "slideleft"
+          :duration "500ms"
+          (box :orientation "h" :halign "end" :space-evenly "true"
+            (button :class "powermenu-btn" :style "font-size: 24px" :onclick "~/.config/eww/scripts/reboot.sh" "累")
+            (button :class "powermenu-btn" :style "font-size: 22px" :onclick "~/scripts/i3lock.sh" "")
+            (button :class "powermenu-btn" :style "font-size: 22px" :onclick "~/.config/eww/scripts/suspend.sh" "")
+            (button :class "powermenu-btn" :style "font-size: 24px" :onclick "~/.config/eww/scripts/logout.sh" "")))
+        (button :class "powermenu-btn powermenu-main" :style "font-size: 24px;" :onclick "~/.config/eww/scripts/shutdown.sh" "襤"))
       )
     )
   )

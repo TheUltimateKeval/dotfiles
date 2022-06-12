@@ -1,0 +1,1 @@
+echo '{ "command": ["get_property", "pause"] }' | socat - ~/.config/mpv/socket | jq '.data'
