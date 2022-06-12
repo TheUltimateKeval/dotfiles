@@ -1,6 +1,6 @@
 # My EndeavourOS BSPWM Dotfiles
 
-![screenshot](https://i.imgur.com/ZfRYxWH.png)
+![screenshot](https://i.imgur.com/OeytZcR.png)
 
 ## Required Stuff
 - [eww](https://github.com/elkowar/eww)
